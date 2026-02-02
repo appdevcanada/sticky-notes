@@ -24,3 +24,8 @@ Drag and resize interactions are handled via native mouse events attached to the
 3. **Install dependencies**:
 ```
 npm install
+```
+
+4. Then, inside the folder, execute:
+```
+npm run dev
