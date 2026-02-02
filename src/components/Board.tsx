@@ -4,14 +4,12 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { checkCollision, getRandomColor } from "../utils/geometry";
 import { Note } from "./Note";
 import { TrashZone } from "./TrashZone";
-import { InteractionType } from "../global/constants";
+import { DEFAULT_NOTE_SIZE, InteractionType } from "../global/constants";
 
 const TRASH_CONFIG = {
   position: { x: 20, y: window.innerHeight - 200 },
   size: { width: 120, height: 120 },
 };
-
-const DEFAULT_NOTE_SIZE: Size = { width: 250, height: 200 };
 
 export const Board: React.FC = () => {
   const [notes, setNotes] = useState<NoteType[]>([]);
@@ -101,10 +99,12 @@ export const Board: React.FC = () => {
       setIsOverTrash(false);
     };
 
+    // Add global listeners
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
 
     return () => {
+      // Cleanup listeners
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
