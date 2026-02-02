@@ -1,0 +1,77 @@
+/* Component styles used across the application */
+
+.board-panel {
+    width: 95vw;
+    height: 95vh;
+    position: relative;
+    background-color: #f0f0f0;
+    background-image: 
+        linear-gradient(#d7d7d7 1px, transparent 1px),
+        linear-gradient(90deg, #d7d7d7 1px, transparent 1px);
+    background-size: 20px 20px;
+    overflow: hidden;
+    cursor: default;
+}
+
+.board-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.note-body {
+    position: absolute;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+}
+
+.note-header {
+    height: 32px;
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-weight: 600;
+    color: whitesmoke;
+}
+
+.note-content {
+    flex: 1;
+    padding: 12px;
+    overflow: hidden;
+    word-wrap: break-word;
+    align-items: start;
+    text-align: start;
+}
+
+.note-on-resize {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+    cursor: nwse-resize;
+    background: 
+      linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.3) 50%);
+    border-radius: 0 0 4px 0;
+}
+
+.note-trash-zone {
+    position: absolute;
+    color: #b71c1c;
+    background-color: #ffcdd2;
+    border: 3px dashed #f44336;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    transition: background-color 0.3s, border-color 0.3s;
+} 
