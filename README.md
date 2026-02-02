@@ -1,73 +1,26 @@
-# React + TypeScript + Vite
+# Sticky Notes Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page web application using **React 19 + TypeScript + Vite** for creating and managing draggable sticky notes on a virtual board.
 
-Currently, two official plugins are available:
+## Goal
+Implement a desktop-focused sticky notes interface supporting four core interactions:
+- **Create**: Double-click anywhere on the board to spawn a new note at the cursor position
+- **Move**: Drag notes by their header to reposition
+- **Resize**: Drag the bottom-right corner handle to adjust dimensions
+- **Delete**: Drop notes onto the trash zone to remove them from the board
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Extra Features
+Different note colours - every new note will get a different colour based on a pre-defined palette.
 
-## React Compiler
+## Architecture
+The application follows a centralized state architecture where the `Board` component maintains the source of truth for all notes and interaction states. Domain entities are strictly typed using TypeScript interfaces (`Note`, `Position`, `Size`, `NoteColor`) and types, ensuring compile-time safety across the component boundary. 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Drag and resize interactions are handled via native mouse events attached to the window during active operations, which decouples the drag logic from the component render cycle and prevents cursor-loss issues when moving quickly. The `Note` component is purely presentational, receiving data and callbacks via props, while `Board` orchestrates collision detection (for trash deletion), state mutations, and coordinates exit animations. This unidirectional data flow makes the application predictable and testable, with performance maintained by minimizing re-renders through targeted state updates.
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Clone or extract** the project folder to your hard drive
+2. **Open terminal** in the project root directory
+3. **Install dependencies**:
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+npm install
